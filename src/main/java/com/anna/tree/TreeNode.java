@@ -65,4 +65,46 @@ public class TreeNode implements Node {
         }
         return null;
     }
+
+    public void delete(int number) {
+        //such element searching
+        TreeNode node = getNode(number);
+        if (node == null) {
+            return;
+        }
+
+        //is leaf
+        if (node.parentNode != null && node.rightNode == null && node.leftNode == null) {
+            node.leafDeleting();
+        }
+    }
+
+    private TreeNode getNode(int number) {
+        if (number > value) {
+            if (rightNode != null) {
+                return rightNode.getNode(number);
+            }
+        }
+        else if (number < value) {
+            if (leftNode != null) {
+                return leftNode.getNode(number);
+            }
+        }
+        else {
+            return this;
+        }
+        return null;
+    }
+
+    private void leafDeleting() {
+        //removing the parent link to this node
+        if (this == parentNode.rightNode) {
+            parentNode.rightNode = null;
+        }
+        else {
+            parentNode.leftNode = null;
+        }
+        //remove parent link
+        parentNode = null;
+    }
 }

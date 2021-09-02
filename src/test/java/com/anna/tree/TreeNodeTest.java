@@ -2,6 +2,11 @@ package com.anna.tree;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.omg.CORBA.portable.InvokeHandler;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 public class TreeNodeTest {
     @Test
@@ -184,6 +189,55 @@ public class TreeNodeTest {
         Assert.assertEquals(null, tree.get(83));
     }
 
+    @Test
+    public void valueNotExistDeleting() {
+        TreeNode tree = new TreeNode(100);
+        tree.add(50);
+        tree.add(75);
+        int expected = 60;
+        Assert.assertEquals(null, tree.get(expected));
+        tree.delete(expected);
+        Assert.assertEquals(null, tree.get(expected));
+        expected = 80;
+        Assert.assertEquals(null, tree.get(expected));
+        tree.delete(expected);
+        Assert.assertEquals(null, tree.get(expected));
+    }
+
+    @Test
+    public void rightLeafDeleting() throws Exception {
+        TreeNode tree = new TreeNode(100);
+        tree.add(200);
+        int expected = 250;
+        tree.add(expected);
+        TreeNode node = getNode(tree, expected);
+        tree.delete(expected);
+        Assert.assertEquals(null, tree.get(expected));
+        Assert.assertEquals(null, node.parentNode);
+    }
+
+    private TreeNode getNode(TreeNode tree, int number) throws Exception {
+        try {
+            Method method = tree.getClass().getDeclaredMethod("getNode", int.class);
+            method.setAccessible(true);
+            return (TreeNode) method.invoke(tree, number);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Test
+    public void leftLeafDeleting() throws Exception {
+        TreeNode tree = new TreeNode(100);
+        tree.add(50);
+        int expected = 25;
+        tree.add(expected);
+        TreeNode node = getNode(tree, expected);
+        tree.delete(expected);
+        Assert.assertEquals(null, tree.get(expected));
+        Assert.assertEquals(null, node.parentNode);
+    }
 
 
 }
