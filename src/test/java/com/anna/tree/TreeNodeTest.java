@@ -108,4 +108,82 @@ public class TreeNodeTest {
         String actual = tree.toString();
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void rightValueFinding() {
+        TreeNode tree = new TreeNode(5);
+        tree.add(3);
+        tree.add(4);
+        tree.add(2);
+        tree.add(7);
+        tree.add(6);
+        tree.add(8);
+        tree.add(9);
+        tree.add(10);
+        int expected = 10;
+        int actual = tree.get(expected);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void leftValueFinding() {
+        TreeNode tree = new TreeNode(5);
+        tree.add(3);
+        tree.add(4);
+        tree.add(2);
+        tree.add(7);
+        tree.add(6);
+        tree.add(8);
+        tree.add(9);
+        tree.add(10);
+        int expected = 2;
+        int actual = tree.get(expected);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void rootValueFinding() {
+        TreeNode tree = new TreeNode(5);
+        tree.add(3);
+        tree.add(7);
+        int expected = 5;
+        int actual = tree.get(expected);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void valueFinding() {
+        TreeNode tree = new TreeNode(100);
+        tree.add(50);
+        tree.add(30);
+        tree.add(75);
+        tree.add(60);
+        tree.add(80);
+        tree.add(90);
+        tree.add(85);
+        tree.add(200);
+        tree.add(150);
+        int expected = 85;
+        int actual = tree.get(expected);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void valueNotExistFinding() {
+        TreeNode tree = new TreeNode(100);
+        tree.add(50);
+        tree.add(30);
+        tree.add(75);
+        tree.add(60);
+        tree.add(80);
+        tree.add(90);
+        tree.add(85);
+        tree.add(200);
+        tree.add(150);
+        Assert.assertEquals(null, tree.get(87));
+        Assert.assertEquals(null, tree.get(83));
+    }
+
+
+
 }

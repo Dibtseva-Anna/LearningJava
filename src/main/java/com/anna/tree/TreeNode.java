@@ -49,5 +49,20 @@ public class TreeNode implements Node {
         return tree.toString();
     }
 
-
+    public Integer get(int number) {
+        if (number > value) {
+            if (rightNode != null) {
+                return rightNode.get(number);
+            }
+        }
+        if (number < value) {
+            if (leftNode != null) {
+                return leftNode.get(number);
+            }
+        }
+        if (number == value) {
+            return value;
+        }
+        return null;
+    }
 }
